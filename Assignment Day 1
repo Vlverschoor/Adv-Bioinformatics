@@ -1,0 +1,34 @@
+# Adv-Bioinformatics
+#Assignment 1: >=3 combined tables, outputs a table showing which products were bought by which customers, sorted by total cost of the product in an order
+
+Select Customers.CustomerName, OrderDetails.OrderID, Products.ProductName, (OrderDetails.Quantity*Products.Price)
+From OrderDetails
+Inner Join Orders
+On OrderDetails.OrderID=Orders.OrderID
+
+Inner Join Customers
+On Orders.CustomerID=Customers.CustomerID
+
+Inner Join Products
+On OrderDetails.ProductID=Products.ProductID
+
+Group by (OrderDetails.Quantity*Products.Price)
+
+#Assignment 2: 2 simple empty tables Titles "Mutations" and "Samples", with various column names already added
+
+CREATE TABLE Mutations
+(
+Sample_ID int,
+Gene varchar(100),
+Location varchar(100),
+Type varchar(100)
+);
+  
+
+CREATE TABLE Samples
+(
+Sample_ID int,
+Patient_ID int,
+Date_aquired varchar(100),
+Sample_type varchar(100)
+);
