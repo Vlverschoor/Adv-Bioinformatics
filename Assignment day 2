@@ -1,0 +1,25 @@
+#mongodb analysis for rec.pos values between 130000000 and 140000000
+
+
+wget https://github.com/pjotrp/bioruby-vcf/raw/master/test/data/input/gatk_exome.vcf  
+
+vi gatk_template.json  
+
+{  
+"rec":{  
+            "chr": "<%= rec.chrom %>",  
+            "pos": <%= rec.pos %>,  
+            "ref": "<%= rec.ref %>",  
+            "alt": "<%= rec.alt[0] %>",  
+            "dp":  <%= rec.info.dp %>  
+}  
+}  
+ 
+cat gatk_exome.vcf |bio-vcf —template gatk_template.json > gatk_exome.json  
+
+mongoimport —db gatk —collection vcf —drop —file gatk_exome.json —jsonArray  
+
+mongo  
+use gatk  
+
+db.vcf.find( { “rec.pos”: { $gt: 130000000, $lt: 140000000} } ).count()  
