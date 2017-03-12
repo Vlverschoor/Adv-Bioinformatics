@@ -29,6 +29,6 @@ CREATE TABLE Samples
 (
 Sample_ID int,
 Patient_ID int,
-Date_aquired varchar(100),
+Date_aquired date(),
 Sample_type varchar(100)
 );
